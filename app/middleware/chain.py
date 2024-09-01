@@ -16,7 +16,7 @@ from langchain_community.document_loaders import PyPDFLoader, JSONLoader
 
 from fastapi import Request, HTTPException, Depends
 
-async def get_document(request: Request):
+async def _get_document(request: Request):
     form = await request.form()
     document = form["document"]
     return document
@@ -33,7 +33,7 @@ def get_llm_chain():
     llm_chain = prompt_template | model | parser
     return llm_chain
 
-async def get_qa_chain(document = Depends(get_document)):
+async def get_qa_chain(document = Depends(_get_document)):
     if document.content_type == "application/pdf":
         loader_func = PyPDFLoader
     elif document.content_type == "application/json":
