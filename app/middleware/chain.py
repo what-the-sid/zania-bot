@@ -14,9 +14,7 @@ from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader, JSONLoader
 
-from io import BytesIO
-
-from fastapi import Request, HTTPException, UploadFile, Depends
+from fastapi import Request, HTTPException, Depends
 
 async def get_document(request: Request):
     form = await request.form()

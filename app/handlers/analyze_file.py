@@ -1,11 +1,7 @@
-import json
-from fastapi import UploadFile, HTTPException
+from fastapi import UploadFile
 
-from app.utils import parse_json_file  # Assume these functions are implemented
+from app.utils import parse_json_file
 from app.schema import QAResponse
-
-from langchain.chains import QAGenerationChain
-from langchain.llms import OpenAI
 
 async def handler(questions_file: UploadFile, chain) -> QAResponse:
     results = []
