@@ -1,6 +1,5 @@
 # Define variables
 PYTHON_ENV = .venv
-REQUIREMENTS_FILE = requirements/local.txt
 ZANIA := $(shell pwd)/zania
 
 # Targets
@@ -38,8 +37,9 @@ install-libs: create-venv
 	. $(PYTHON_ENV)/bin/activate && \
 	echo "Upgrading pip..." && \
 	pip install --upgrade pip && \
-	echo "Installing libraries from $(REQUIREMENTS_FILE)..." && \
-	pip install -r $(REQUIREMENTS_FILE) && \
+	pip install poetry && \
+	echo "Installing libraries" && \
+	poetry install && \
 	echo "Libraries installed."
 
 # Create a symbolic link for the 'zania' command
