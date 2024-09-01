@@ -1,7 +1,8 @@
 
 # Zania Bot 🤖
 
-API for answering questions based on a document using LangChain.
+API for answering questions based on a document using LangChain.\
+_(**Note**: Authentication has not been added to the FastAPI app)_
 
 ## Run Locally 🚀
 
@@ -117,8 +118,3 @@ For Example, You can fine tune the API by changing the `model` and `system promp
 - Add test cases to the APIs
 - Add a pre-commit to the build
 
-## References
-
-[Langchain PDF ingestion](https://python.langchain.com/v0.2/docs/tutorials/pdf_qa/)\
-[Langchain Document Loaders (PDF)](https://python.langchain.com/v0.2/api_reference/community/document_loaders/langchain_community.document_loaders.parsers.pdf.PyPDFParser.html)\
-[Langchain Document Loaders (JSON)](https://python.langchain.com/v0.2/api_reference/community/document_loaders/langchain_community.document_loaders.json_loader.JSONLoader.html)
