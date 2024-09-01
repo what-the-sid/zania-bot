@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  fastapi:
+    build: .
+    ports:
+      - "8000:80"
+    environment:
+      - ENV=production
+      - OPEN_API_KEY=${OPEN_API_KEY}
+    command: /bin/sh -c "make $ENV && zania run-server $ENV"

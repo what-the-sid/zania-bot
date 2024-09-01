@@ -1,0 +1,55 @@
+#!/bin/bash
+
+activate_venv() {
+    if [ -d ".venv" ]; then
+        echo "Activating virtual environment..."
+        source .venv/bin/activate
+    else
+        echo "Virtual environment not found. Please create one in the project directory."
+        exit 1
+    fi
+}
+
+set_env_vars() {
+    read -p "OPENAI_API_KEY: " OPENAI_API_KEY
+
+    echo "OPENAI_API_KEY=${OPENAI_API_KEY}" > .env
+
+    echo ".env file created with the provided environment variable."
+}
+
+case "$1" in
+    run-server)
+        echo "Running Zania app..."
+        ENVIRONMENT="$2"
+
+        activate_venv
+
+        if [ -f .env ]; then
+            echo "Loading environment variables from .env file..."
+            export $(grep -v '^#' .env | xargs)
+        else
+            echo "Warning: No .env file found. Proceeding without environment variables."
+        fi
+
+        if [ "$ENVIRONMENT" = "dev" ]; then
+            echo "Running in development mode with hot reload..."
+            uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload --reload-dir=app --reload-exclude='.venv'
+        elif [ "$ENVIRONMENT" = "production" ]; then
+            echo "Running in production mode without hot reload..."
+            uvicorn app.main:app --host 127.0.0.1 --port 8000
+        else
+            echo "Error: Invalid environment specified. Use 'dev' or 'production'."
+            exit 1
+        fi
+        ;;
+
+    config)
+        set_env_vars
+        ;;
+
+    *)
+        echo "Usage: zania run-server [dev|production] | zania config"
+        exit 1
+        ;;
+esac

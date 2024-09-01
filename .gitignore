@@ -1,0 +1,52 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment files
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Flask specific files
+instance/
+*.pyo
+
+# MacOS specific files
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Log files
+*.log
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Test artifacts
+.tox/
+.pytest_cache/
+
+# Database files
+*.sqlite3
+*.db
+
+# Build and dist directories
+build/
+dist/
+*.egg-info/
