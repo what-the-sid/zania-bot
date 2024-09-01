@@ -16,3 +16,6 @@ QA_TEMPLATE = (
     "\n\n"
     "{context}"
     )
+HTTP_ORIGINS = ["*"]
+HTTP_HEADERS = ["*"]
+HTTP_METHODS = ["*"]

@@ -1,11 +1,8 @@
-import os
 import app.settings as settings
 
 from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
 
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
-from langchain_core.output_parsers import StrOutputParser
 from langserve import add_routes
 
 from app import routes
@@ -17,14 +14,20 @@ app = FastAPI(
     version = settings.VERSION,
 )
 
-# Add LangChain routes
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.HTTP_ORIGINS,
+    allow_credentials=True,
+    allow_methods=settings.HTTP_METHODS,
+    allow_headers=settings.HTTP_HEADERS,
+)
+
 add_routes(
     app,
     get_llm_chain(),
     path="/chain",
 )
 
-# Include application routes
 app.include_router(
     routes.router,
     prefix=settings.URL_PREFIX,
